@@ -19,7 +19,7 @@ public class PhotobookService {
 	@Inject
 	private MongoClient mongoClient;
 
-	public PhotobookService(MongoClient mongoTemplate) {
+	public PhotobookService(MongoClient mongoClient) {
 		this.mongoClient = mongoClient;
 	}
 
