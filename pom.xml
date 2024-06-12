@@ -25,6 +25,7 @@
     <fe.dist.dir>src/main/resources/META-INF/resources/home/</fe.dist.dir>
     <exec-plugin.version>3.1.0</exec-plugin.version>
     <antrun-plugin.version>3.1.0</antrun-plugin.version>
+    <jacoco-maven-plugin-version>0.8.12</jacoco-maven-plugin-version>
   </properties>
 
   <scm>
