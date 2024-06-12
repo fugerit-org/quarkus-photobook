@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/photobook-demo/home/static/css/main.db62923b.css",
+    "main.js": "/photobook-demo/home/static/js/main.45ac3d0e.js",
+    "static/js/453.13485e58.chunk.js": "/photobook-demo/home/static/js/453.13485e58.chunk.js",
+    "index.html": "/photobook-demo/home/index.html",
+    "main.db62923b.css.map": "/photobook-demo/home/static/css/main.db62923b.css.map",
+    "main.45ac3d0e.js.map": "/photobook-demo/home/static/js/main.45ac3d0e.js.map",
+    "453.13485e58.chunk.js.map": "/photobook-demo/home/static/js/453.13485e58.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.db62923b.css",
+    "static/js/main.45ac3d0e.js"
+  ]
+}
