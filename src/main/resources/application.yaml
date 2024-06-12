@@ -4,4 +4,7 @@ quarkus:
     root-path: /photobook-demo
 
   mongodb:
-    connection-string: mongodb://localhost:27017/photobook_demo
+    connection-string: ${MONGODB_URL:mongodb://localhost:27017/photobook_demo}
+
+  native:
+    additional-build-args: -H:IncludeResources=build.properties

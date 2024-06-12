@@ -1,58 +1,148 @@
-# quarkus-photobook
+# Quarkus Photobook Demo App
 
-This project uses Quarkus, the Supersonic Subatomic Java Framework.
+[![Keep a Changelog v1.1.0 badge](https://img.shields.io/badge/changelog-Keep%20a%20Changelog%20v1.1.0-%23E05735)](https://github.com/fugerit-org/quarkus-photobook/blob/master/CHANGELOG.md)
+[![license](https://img.shields.io/badge/License-Apache%20License%202.0-teal.svg)](https://opensource.org/licenses/Apache-2.0)
+[![code of conduct](https://img.shields.io/badge/conduct-Contributor%20Covenant-purple.svg)](https://github.com/fugerit-org/fj-universe/blob/main/CODE_OF_CONDUCT.md)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=fugerit-org_quarkus-photobook&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=fugerit-org_quarkus-photobook)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=fugerit-org_quarkus-photobook&metric=coverage)](https://sonarcloud.io/summary/new_code?id=fugerit-org_quarkus-photobook)
+[![Docker images](https://img.shields.io/badge/dockerhub-images-important.svg?logo=Docker)](https://hub.docker.com/repository/docker/fugeritorg/quarkus-photobook/general)
 
-If you want to learn more about Quarkus, please visit its website: https://quarkus.io/ .
+## Introduction
 
-## Running the application in dev mode
+Recently I followed some [Mongo DB courses](https://learn.mongodb.com/) and attended the [Spring I/O 2023](https://2023.springio.net/).  
+So I decided to practice a bit. This project is the result.  
+Currently is just a simple POC integration of Mongo DB and Quarkus
 
-You can run your application in dev mode that enables live coding using:
-```shell script
-./mvnw compile quarkus:dev
+There is a live version at the link [https://springio23.fugerit.org/photobook-demo/home/index.html](https://springio23.fugerit.org/photobook-demo/home/index.html)
+
+This is an alternate version of the [springboot project](https://github.com/fugerit-org/springboot-photobook/) based on [quarkus](https://quarkus.io/)
+
+## Prerequisites
+
+| software                                                                                                                                                                                                 | docker compose | local build and run |
+|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------|---------------------|
+| [![Java runtime version](https://img.shields.io/badge/run%20on-java%2021+-%23113366.svg?style=for-the-badge&logo=openjdk&logoColor=white)](https://universe.fugerit.org/src/docs/versions/java21.html)   | no             | yes                 |
+| [![Java build version](https://img.shields.io/badge/build%20on-GraalVM%2021+-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)](https://universe.fugerit.org/src/docs/versions/gvm21.html) | no             | yes                 |
+| [![Apache Maven](https://img.shields.io/badge/Apache%20Maven-3.9.0+-C71A36?style=for-the-badge&logo=Apache%20Maven&logoColor=white)](https://universe.fugerit.org/src/docs/versions/maven3_9.html)       | no             | yes                 |
+| [![Node JS](https://img.shields.io/badge/Node%20JS-20+-1AC736?style=for-the-badge&logo=node.js&logoColor=white)](https://universe.fugerit.org/src/docs/versions/node.html)                               | no             | yes                 |
+| [![Docker](https://img.shields.io/badge/docker-26+-1266E7?style=for-the-badge&logo=docker&logoColor=white)](https://universe.fugerit.org/src/docs/versions/docker.html)                                  | yes            | no                  |
+
+## Quickstart 
+
+### Start via docker compose
+
+```shell
+docker-compose -f src/main/docker/docker-compose.yml up -d
 ```
 
-> **_NOTE:_**  Quarkus now ships with a Dev UI, which is available in dev mode only at http://localhost:8080/q/dev/.
+### Start in dev mode
 
-## Packaging and running the application
+1. Create mongo db instance with db initialization (script src/test/resources/mongo-db/mongo-init.js) :
 
-The application can be packaged using:
-```shell script
-./mvnw package
-```
-It produces the `quarkus-run.jar` file in the `target/quarkus-app/` directory.
-Be aware that it’s not an _über-jar_ as the dependencies are copied into the `target/quarkus-app/lib/` directory.
-
-The application is now runnable using `java -jar target/quarkus-app/quarkus-run.jar`.
-
-If you want to build an _über-jar_, execute the following command:
-```shell script
-./mvnw package -Dquarkus.package.type=uber-jar
+```shell
+docker run --rm -p 27017:27017 --name MONGO8 -v `pwd`/src/test/resources/mongo-db/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js mongo:8.0.0-rc7
 ```
 
-The application, packaged as an _über-jar_, is now runnable using `java -jar target/*-runner.jar`.
+This will start a mongo db linked on the default port and with the default username/password (root/example).
 
-## Creating a native executable
+2. Start the application in dev mode
 
-You can create a native executable using: 
-```shell script
-./mvnw package -Dnative
+The back end
+
+```shell
+mvn quarkus:dev
 ```
 
-Or, if you don't have GraalVM installed, you can run the native executable build in a container using: 
-```shell script
-./mvnw package -Dnative -Dquarkus.native.container-build=true
+And front end
+
+```shell
+cd src/main/react
+npm install
+npm run start
 ```
 
-You can then execute your native executable with: `./target/quarkus-photobook-1.0.0-SNAPSHOT-runner`
+3. Access home page
 
-If you want to learn more about building native executables, please consult https://quarkus.io/guides/maven-tooling.
+<http://localhost:8080/photobook-demo/home/index.html>
 
-## Related Guides
+## environment variables
 
-- REST Jackson ([guide](https://quarkus.io/guides/rest#json-serialisation)): Jackson serialization support for Quarkus REST. This extension is not compatible with the quarkus-resteasy extension, or any of the extensions that depend on it
-- SmallRye Health ([guide](https://quarkus.io/guides/smallrye-health)): Monitor service health
-- Cache ([guide](https://quarkus.io/guides/cache)): Enable application data caching in CDI beans
-- SmallRye OpenAPI ([guide](https://quarkus.io/guides/openapi-swaggerui)): Document your REST APIs with OpenAPI - comes with Swagger UI
-- Jacoco - Code Coverage ([guide](https://quarkus.io/guides/tests-with-coverage)): Jacoco test coverage support
-- YAML Configuration ([guide](https://quarkus.io/guides/config-yaml)): Use YAML to configure your Quarkus application
-- MongoDB client ([guide](https://quarkus.io/guides/mongodb)): Connect to MongoDB in either imperative or reactive style
+In case you want a custom mongo db connection :
+
+| key         | dedault                                  | 
+|-------------|------------------------------------------|
+| MONGODB_URL | mongodb://localhost:27017/photobook_demo |
+
+## Quarkus package
+
+It is possible to compile the application to a single jar package :
+
+```shell
+mvn package -Pbuildreact
+```
+
+And then run
+
+```shell
+java -jar target/quarkus-app/quarkus-run.jar
+```
+
+## Native image compilation
+
+The code has been set for native compilation with [GraalVM](https://www.graalvm.org/) (tested with GraalVM 22.3 CE).  
+
+It is possible to compile :
+
+```shell
+mvn install -Pbuildreact -Dnative
+```
+
+And then run
+
+```shell
+./target/quarkus-photobook*-runner
+```
+
+Refer to [Quarkus Documentation](https://quarkus.io/guides/building-native-image) for more informations.
+
+## Docker image
+
+### docker container (jvm)
+
+Build quarkus application (jar)
+
+```shell
+mvn package -P buildreact
+```
+
+Build container openjdk
+
+```shell
+docker build -t quarkus-photobook-jvm -f src/main/docker/Dockerfile.jvm .
+```
+
+Running the container :
+
+```shell
+docker run -it -p 8080:8080 --name quarkus-photobook-jvm quarkus-photobook-jvm
+```
+
+### docker container (native)
+
+Building the native image :
+
+```shell
+mvn -Pbuildreact,native clean native:compile
+```
+
+Building the container image : 
+
+```shell
+docker build -t quarkus-photobook-native -f src/main/docker/Dockerfile.native .
+```
+
+Running the container :
+
+```shell
+docker run -it -p 8080:8080 --name quarkus-photobook-native quarkus-photobook-native
+```
