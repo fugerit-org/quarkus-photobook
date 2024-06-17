@@ -1,20 +1,17 @@
 package test.org.fugerit.java.demo.quarkus.photobook.rest;
 
 import io.quarkus.test.junit.QuarkusTest;
+import io.quarkus.test.junit.TestProfile;
+import jakarta.ws.rs.core.Response;
+import org.fugerit.java.core.cfg.ConfigRuntimeException;
+import org.fugerit.java.demo.quarkus.photobook.rest.RestHelper;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.testcontainers.containers.GenericContainer;
-import org.testcontainers.utility.MountableFile;
-
-import java.io.File;
-
 import static io.restassured.RestAssured.given;
 
 @QuarkusTest
+@TestProfile(MongoContainerProfile.class)
 class PhotobookRestTest {
-
-    final static GenericContainer mongoDBContainer = new GenericContainer( "mongo:8.0.0-rc7" )
-            .withCopyToContainer(MountableFile.forHostPath( new File( "src/test/resources/mongo-db/mongo-init.js" ).getPath() ), "/docker-entrypoint-initdb.d/mongo-init.js" )
-            .withExposedPorts( 27017 );
 
     @Test
     void testListOk() {
@@ -32,6 +29,26 @@ class PhotobookRestTest {
                 .get( "/api/photobook/view/images/springio23" )
                 .then()
                 .statusCode(200);
+    }
+
+    @Test
+    void testImageOk() {
+        given()
+                .when()
+                .get( "/api/photobook/view/download/springio23_1000.jpg" )
+                .then()
+                .statusCode(200);
+    }
+
+    @Test
+    void testRestHelper() {
+        Response res = RestHelper.defaultHandle( () -> {
+            if ( Boolean.TRUE.booleanValue() ) {
+                throw new ConfigRuntimeException( "scenario exception" );
+            }
+            return null;
+        } );
+        Assertions.assertEquals(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode(), res.getStatus());
     }
 
 }
