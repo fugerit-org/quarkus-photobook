@@ -1,5 +1,6 @@
 package org.fugerit.java.demo.quarkus.photobook.rest;
 
+import io.smallrye.common.annotation.RunOnVirtualThread;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
@@ -33,6 +34,7 @@ public class PhotobookRest {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/list")
+    @RunOnVirtualThread
     public Response getVersion() {
         return RestHelper.defaultHandle( () -> {
             Document doc =  this.photobookService.listPhotobooks(Locale.ITALY.getCountry(), 10, 1);
@@ -44,6 +46,7 @@ public class PhotobookRest {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/images/{photobookId}/language/{language}/current_page/{currentPage}/page_size/{pageSize}")
+    @RunOnVirtualThread
     public Response images( @PathParam( "photobookId" ) String photobookId, @PathParam( "language" ) String language,
                                                        @PathParam( "currentPage" ) Integer currentPage, @PathParam( "pageSize" ) Integer pageSize ) {
         return RestHelper.defaultHandle( () -> {
@@ -56,6 +59,7 @@ public class PhotobookRest {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/images/{photobookId}")
+    @RunOnVirtualThread
     public Response images( @PathParam( "photobookId" ) String photobookId ) {
         return this.images(photobookId, "def", 1, DEF_PAGE_SIZE);
     }
@@ -63,6 +67,7 @@ public class PhotobookRest {
     @GET
     @Produces( "image/jpeg" )
     @Path(value = "/download/{imagePath}" )
+    @RunOnVirtualThread
     public byte[] downloadImage( @PathParam( "imagePath" ) String imagePath ) throws IOException {
         imagePath = imagePath.substring( 0, imagePath.indexOf( '.' ) );
         String[] split = imagePath.split( "_" );
