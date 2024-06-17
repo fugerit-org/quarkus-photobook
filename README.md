@@ -94,7 +94,7 @@ The code has been set for native compilation with [GraalVM](https://www.graalvm.
 It is possible to compile :
 
 ```shell
-mvn install -Pbuildreact -Dnative
+mvn install -Dnative -Pbuildreact
 ```
 
 And then run
@@ -132,7 +132,7 @@ docker run -it -p 8080:8080 --name quarkus-photobook-jvm quarkus-photobook-jvm
 Building the native image :
 
 ```shell
-mvn -Pbuildreact,native clean native:compile
+mvn -Dnative -Pbuildreact
 ```
 
 Building the container image : 
