@@ -9,10 +9,19 @@ import org.junit.jupiter.api.Test;
 class MetaRestTest {
 
     @Test
-    void testMetaOk() {
+    void testMetaVersionOk() {
         given()
                 .when()
                 .get( "/api/meta/version" )
+                .then()
+                .statusCode(200);
+    }
+
+    @Test
+    void testMetaInfoOk() {
+        given()
+                .when()
+                .get( "/api/meta/info" )
                 .then()
                 .statusCode(200);
     }

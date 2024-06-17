@@ -27,4 +27,23 @@ public class MetaRest {
         } );
     }
 
+    private static final String[] ADD_PROPS = { "java.version", "java.vendor", "os.name", "os.version", "os.arch" };
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/info")
+    public Response getInfo() {
+        return RestHelper.defaultHandle( () -> {
+            StringBuilder info = new StringBuilder();
+            for ( String key : ADD_PROPS ) {
+                info.append( key );
+                info.append( " = " );
+                info.append( System.getProperty( key ) );
+                info.append( ", " );
+            }
+            String res = info.toString();
+            return Response.ok().entity( res ).build();
+        } );
+    }
+
 }
