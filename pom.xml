@@ -346,18 +346,18 @@
                 <goals>
                   <goal>prepare-agent</goal>
                 </goals>
+                <configuration>
+                  <exclClassLoaders>*QuarkusClassLoader</exclClassLoaders>
+                  <destFile>${project.build.directory}/jacoco-quarkus.exec</destFile> <!-- this is the fix -->
+                  <append>true</append>
+                </configuration>
               </execution>
               <execution>
-                <id>report</id>
+                <id>generate-code-coverage-report</id>
+                <phase>test</phase>
                 <goals>
                   <goal>report</goal>
                 </goals>
-                <configuration>
-                  <formats>
-                    <format>XML</format>
-                    <format>HTML</format>
-                  </formats>
-                </configuration>
               </execution>
             </executions>
           </plugin>
