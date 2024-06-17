@@ -12,7 +12,7 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
     <quarkus.platform.group-id>io.quarkus.platform</quarkus.platform.group-id>
-    <quarkus.platform.version>3.11.1</quarkus.platform.version>
+    <quarkus.platform.version>3.11.2</quarkus.platform.version>
     <skipITs>true</skipITs>
     <surefire-plugin.version>3.2.5</surefire-plugin.version>
     <lombok-version>1.18.32</lombok-version>
@@ -26,6 +26,9 @@
     <exec-plugin.version>3.1.0</exec-plugin.version>
     <antrun-plugin.version>3.1.0</antrun-plugin.version>
     <jacoco-maven-plugin-version>0.8.12</jacoco-maven-plugin-version>
+    <graalvm-maven-plugin-version>0.10.2</graalvm-maven-plugin-version>
+    <native-base-args>-H:IncludeResources=build.properties</native-base-args>
+    <quarkus.native.additional-build-args>${native-base-args}</quarkus.native.additional-build-args>
   </properties>
 
   <scm>
@@ -362,5 +365,20 @@
       </build>
     </profile>
 
+    <profile>
+      <id>instrumented</id>
+      <properties>
+        <quarkus.native.additional-build-args>${native-base-args},--pgo-instrument</quarkus.native.additional-build-args>
+      </properties>
+    </profile>
+
+    <profile>
+      <id>optimized</id>
+      <properties>
+        <quarkus.native.additional-build-args>${native-base-args},--pgo=${project.basedir}/default.iprof,-march=native</quarkus.native.additional-build-args>
+      </properties>
+    </profile>
+
   </profiles>
+
 </project>

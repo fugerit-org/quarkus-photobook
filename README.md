@@ -146,3 +146,89 @@ Running the container :
 ```shell
 docker run -it -p 8080:8080 --name quarkus-photobook-native quarkus-photobook-native
 ```
+
+## Native optimization : PGO
+
+This section is based on <https://github.com/alina-yur/native-spring-boot>.
+
+One of the most powerful performance optimizations in Native Image is profile-guided optimizations (PGO).
+
+1. Build an instrumented image:
+
+```shell
+mvn package -Dnative -Pinstrumented
+```
+
+2. Run the app and apply relevant workload:
+
+```shell
+mv ./target/quarkus-photobook*runner ./target/quarkus-photobook-instrumented
+```
+
+```shell
+./target/quarkus-photobook-instrumented
+```
+
+```shell
+hey -n=30000 http://localhost:8080/photobook-demo/api/photobook/view/list
+```
+
+```shell
+hey -n=30000 http://localhost:8080/photobook-demo/api/photobook/view/images/springio23/language/it/current_page/1/page_size/5
+```
+
+after you shut down the app, you'll see an `iprof` file in your working directory.
+
+3. Build an app with profiles (they are being picked up via `<buildArg>--pgo=${project.basedir}/default.iprof</buildArg>`):
+
+```shell
+mvn package -Dnative -Poptimized
+```
+
+## Benchmark scripts
+
+Prerequisites :
+- running mongo db
+- `hey` installed
+- `psrecord` installed
+
+At the end of a run, an image will be plotted in the `target` folder.
+
+### 1. Benchmark JIT
+
+```shell
+mvn clean package
+```
+
+```shell
+./src/main/script/bench-jit.sh
+```
+
+### 2. Benchmark native
+
+Follow steps in 'Native optimization : PGO' section
+
+```shell
+./src/main/script/bench-native.sh
+```
+
+### 3. Benchmark result
+
+Sample result of JIT benchmark run :
+
+![JIT Benchmark Result](src/main/docs/images/bench-result-jit-20240617.png)
+
+Sample result of native (AOT) benchmark run :
+
+![Native Benchmark Result](src/main/docs/images/bench-result-native-20240617.png)
+
+## application stack
+
+| Layer             | 2024 version   |
+|-------------------|----------------|
+| Persistence       | MongoDB 8      |
+| Java version      | GraalVM 21     |
+| API REST          | Quarkus 3.11.x |
+| Node JS           | Node 20        |
+| Front end package | Vite           |
+| Front end UI      | React 18.3     |
