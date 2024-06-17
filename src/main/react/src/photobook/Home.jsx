@@ -113,7 +113,7 @@ class Home extends Component {
 			printList =  <List sx={{ width: '100%', maxWidth: 800 }}>{renderList}</List>
 		}
 		return <Fragment>
-			<h1>Quarkus Demo : Album fotografico</h1>
+			<h1>Springboot Demo : Album fotografico</h1>
 			{printList}
 		</Fragment>
 	}
