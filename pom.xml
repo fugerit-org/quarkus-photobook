@@ -29,6 +29,7 @@
     <graalvm-maven-plugin-version>0.10.2</graalvm-maven-plugin-version>
     <native-base-args>-H:IncludeResources=build.properties</native-base-args>
     <quarkus.native.additional-build-args>${native-base-args}</quarkus.native.additional-build-args>
+    <sonar.coverage.jacoco.xmlReportPaths>${project.basedir}/target/jacoco-report/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
   </properties>
 
   <scm>
