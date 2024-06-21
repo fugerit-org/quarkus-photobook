@@ -1,6 +1,7 @@
 quarkus:
 
   http:
+    http2: true
     root-path: /photobook-demo
 
   mongodb:
