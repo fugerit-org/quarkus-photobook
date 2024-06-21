@@ -1,4 +1,4 @@
-# sample docker compose file for https://github.com/fugerit-org/springboot-photobook
+# sample docker compose file for https://github.com/fugerit-org/quarkus-photobook
 # docker-compose -f src/main/docker/docker-compose.yml up -d
 version: '3.8'
 
