@@ -41,6 +41,8 @@ public class MetaRest {
                 info.append( System.getProperty( key ) );
                 info.append( ", " );
             }
+            info.append( "max memory (mb) : " );
+            info.append( Runtime.getRuntime().maxMemory()/1024/1024 );
             String res = info.toString();
             return Response.ok().entity( res ).build();
         } );
