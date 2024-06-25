@@ -6,4 +6,4 @@ WORKDIR /app
 COPY target/quarkus-photobook*-runner /app/quarkus-photobook
 
 # Run the application
-CMD ["/app/quarkus-photobook"]
+ENTRYPOINT [ "sh", "-c", "/app/quarkus-photobook ${JAVA_OPTS_APPEND}"]

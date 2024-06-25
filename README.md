@@ -65,13 +65,23 @@ npm run start
 
 <http://localhost:8080/photobook-demo/home/index.html>
 
-## environment variables
+## project environment variables
 
 In case you want a custom mongo db connection :
 
 | key         | dedault                                  | 
 |-------------|------------------------------------------|
 | MONGODB_URL | mongodb://localhost:27017/photobook_demo |
+
+## container environment variables
+
+Other custom environment variables :
+
+| key              | dedault | description                                 |
+|------------------|---------|---------------------------------------------|
+| JAVA_OPTS_APPEND |         | append java options (for instance '-Xmx1g') |
+
+For the Dockefile.jvm build, see the [RedHat UBI OpenJDK image documentation](https://jboss-container-images.github.io/openjdk/) for more options.
 
 ## Quarkus package
 
