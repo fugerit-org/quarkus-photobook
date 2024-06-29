@@ -1,7 +1,0 @@
-runtime: java21
-
-# setup, for instance, an MongoDB Atlas URL
-#env_variables:
-#  MONGODB_URL: "mongodb_url"
-
-

@@ -1,7 +1,0 @@
-runtime: java21
-
-entrypoint: ./quarkus-photobook-runner
-
-# setup, for instance, an MongoDB Atlas URL
-#env_variables:
-#  MONGODB_URL: "mongodb_url"

@@ -242,3 +242,30 @@ Sample result of native (AOT) benchmark run :
 | Node JS           | Node 20        |
 | Front end package | Vite           |
 | Front end UI      | React 18.3     |
+
+
+## Deploy on Google App Engine
+
+[Simple app.yaml for AOT](src/main/appengine/app-aot.yaml) and
+[Simple app.yaml for JIT](src/main/appengine/app-jit.yaml)
+
+Customize the app.yaml and run gcloud 
+
+```shell
+gcloud quarkus-photobook-*.jar --appyaml=src/main/appengine/app-jit.yaml
+```
+
+For JIT version or
+
+```shell
+gcloud quarkus-photobook-runner --appyaml=src/main/appengine/app-aot.yaml
+```
+
+For AOT version
+
+For more information on Google Cloud CLI : 
+<https://cloud.google.com/sdk/gcloud/reference/app/deploy>
+
+This section is based on <https://github.com/alina-yur/native-spring-boot>.
+
+One of the most powerful performance optimizations in Native Image is profile-guided optimizations (PGO).
