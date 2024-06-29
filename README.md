@@ -246,6 +246,10 @@ Sample result of native (AOT) benchmark run :
 
 ## Deploy on Google App Engine
 
+Prerequisites :
+* google cloud account
+* GCloud CLI
+
 [Simple app.yaml for AOT](src/main/appengine/app-aot.yaml) and
 [Simple app.yaml for JIT](src/main/appengine/app-jit.yaml)
 
@@ -269,3 +273,28 @@ For more information on Google Cloud CLI :
 This section is based on <https://github.com/alina-yur/native-spring-boot>.
 
 One of the most powerful performance optimizations in Native Image is profile-guided optimizations (PGO).
+
+## Deploy on KNative
+
+Prerequisites : 
+* container environment (docker / podman)
+* Kubernates (for instance minikube)
+* Knative
+
+After setting up Knative, 
+Customize the [quarkus-photobook-jit.yaml](quarkus-photobook-jit.yaml) or
+[quarkus-photobook-aot.yaml](quarkus-photobook-aot.yaml) service deployment.
+
+And run
+
+```shell
+kubectl apply -f quarkus-photobook-jit.yaml
+```
+
+For JIT version or
+
+```shell
+kubectl apply -f quarkus-photobook-aot.yaml
+```
+
+For AOT version
