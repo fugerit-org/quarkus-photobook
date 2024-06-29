@@ -255,8 +255,14 @@ Prerequisites :
 
 Customize the app.yaml and run gcloud 
 
+For JIT version the uber kar packaging is needed : 
+
 ```shell
-gcloud quarkus-photobook-*.jar --appyaml=src/main/appengine/app-jit.yaml
+mvn package -Dquarkus.package.jar.type=uber-jar
+```
+
+```shell
+gcloud quarkus-photobook-runner.jar --appyaml=src/main/appengine/app-jit.yaml
 ```
 
 For JIT version or
@@ -267,12 +273,9 @@ gcloud quarkus-photobook-runner --appyaml=src/main/appengine/app-aot.yaml
 
 For AOT version
 
-For more information on Google Cloud CLI : 
-<https://cloud.google.com/sdk/gcloud/reference/app/deploy>
-
-This section is based on <https://github.com/alina-yur/native-spring-boot>.
-
-One of the most powerful performance optimizations in Native Image is profile-guided optimizations (PGO).
+Further reference : 
+* <https://cloud.google.com/sdk/gcloud/reference/app/deploy>
+* <https://quarkus.io/guides/deploying-to-google-cloud>
 
 ## Deploy on KNative
 
