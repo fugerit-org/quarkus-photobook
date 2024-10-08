@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- quarkus version set to 3.15.1
 - lombok version set to 1.18.34
 
 ## [1.0.0] - 2024-06-29
