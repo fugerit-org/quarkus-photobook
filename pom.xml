@@ -15,7 +15,7 @@
     <quarkus.platform.version>3.11.2</quarkus.platform.version>
     <skipITs>true</skipITs>
     <surefire-plugin.version>3.2.5</surefire-plugin.version>
-    <lombok-version>1.18.32</lombok-version>
+    <lombok-version>1.18.34</lombok-version>
     <fj-version>8.6.2</fj-version>
     <buildnumber-maven-plugin-version>3.2.0</buildnumber-maven-plugin-version>
     <licenseURL>http://www.apache.org/licenses/LICENSE-2.0.txt</licenseURL>
@@ -364,6 +364,13 @@
           </plugin>
         </plugins>
       </build>
+    </profile>
+
+    <profile>
+      <id>monitored</id>
+      <properties>
+        <quarkus.native.additional-build-args>--pgo=${project.basedir}/default.iprof -march=native --enable-monitoring=heapdump,jfr,jvmstat</quarkus.native.additional-build-args>
+      </properties>
     </profile>
 
     <profile>
