@@ -142,7 +142,7 @@ docker run -it -p 8080:8080 --name quarkus-photobook-jvm quarkus-photobook-jvm
 Building the native image :
 
 ```shell
-mvn -Dnative -Pbuildreact
+mvn install -Dnative -Pbuildreact
 ```
 
 Building the container image : 
