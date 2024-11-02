@@ -154,7 +154,8 @@ docker build -t quarkus-photobook-native -f src/main/docker/Dockerfile.native .
 Running the container :
 
 ```shell
-docker run -it -p 8080:8080 --name quarkus-photobook-native quarkus-photobook-native
+
+
 ```
 
 ## Native optimization : PGO
