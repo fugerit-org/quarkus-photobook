@@ -12,7 +12,7 @@ import java.util.Map;
 @Slf4j
 public class MongoContainerProfile implements QuarkusTestProfile {
 
-    final GenericContainer mongoDBContainer = new GenericContainer( "mongo:8.0.0-rc7" )
+    final GenericContainer mongoDBContainer = new GenericContainer( "mongo:8.0" )
             .withCopyToContainer(MountableFile.forHostPath( new File( "src/test/resources/mongo-db/mongo-init.js" ).getPath() ), "/docker-entrypoint-initdb.d/mongo-init.js" )
             .withExposedPorts( 27017 );
 
