@@ -7,8 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+[1.0.1] - 2025-02-17
+
 ### Changed
 
+- workflow review
 - using actions/setup-java for native build
 - fj-core version set to 8.6.6
 - quarkus version set to 3.18.3
