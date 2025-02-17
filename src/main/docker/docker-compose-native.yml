@@ -1,5 +1,5 @@
 # sample docker compose file for https://github.com/fugerit-org/quarkus-photobook
-# docker compose -f src/main/docker/docker-compose.yml up -d
+# docker compose -f src/main/docker/docker-compose-native.yml up -d
 
 # Define the networks
 networks:
@@ -27,7 +27,7 @@ services:
   photobook:
     # possible to chose more tags from :
     # https://hub.docker.com/repository/docker/fugeritorg/springboot-photobook/general
-    image: fugeritorg/quarkus-photobook:latest
+    image: fugeritorg/quarkus-photobook:latest-native
     container_name: quarkus-photobook
     restart: always
     networks:
