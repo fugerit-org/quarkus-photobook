@@ -7,9 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-[1.0.1] - 2025-02-17
+### Fixed
 
-### Changed
+- build react on native docker workflow
+
+[1.0.1] - 2025-02-17
 
 - workflow review
 - using actions/setup-java for native build
