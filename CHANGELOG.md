@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- update quarkus to version 3.31.1
+- mongo db version 8.2.3
+
 ## [1.0.2] - 2025-02-17
 
 ### Added
@@ -17,7 +22,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - build react on native docker workflow
 
-## [1.0.1] - 2025-02-17
+[1.0.1] - 2025-02-17
 
 ### Changed
 
