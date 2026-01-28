@@ -30,6 +30,6 @@ hey -n=${LOOP_COUNT} -c=8 ${TEST_URL}
 print "Executing benchmark load"
 hey -n=${LOOP_COUNT} -c=8 ${TEST_URL}
 
-print "JVM run done!🎉"
+print "AOT run done!🎉"
 kill $PID
 sleep 1
